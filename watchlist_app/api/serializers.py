@@ -12,6 +12,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 class WatchListSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True, read_only=True)
     len_name = serializers.SerializerMethodField()
+    avg_rating = serializers.SerializerMethodField()
 
     class Meta:
         model = WatchList
@@ -19,6 +20,9 @@ class WatchListSerializer(serializers.ModelSerializer):
 
     def get_len_name(self, object):
         return len(object.title)
+
+    def get_avg_rating(self, object):
+        return round(object.avg_rating, 2)
 
 class StreamPlatformSerializer(serializers.HyperlinkedModelSerializer):
     watchlist = WatchListSerializer(many=True, read_only=True)

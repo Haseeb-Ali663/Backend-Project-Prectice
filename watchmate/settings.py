@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'watchlist_app',
     'rest_framework',
-    'rest_framework.authtoken' 
+    'rest_framework.authtoken',
+    'django_filters',
      
 ]
 
@@ -143,10 +144,16 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES':{
         'anon': '5/day',
         'user': '10/day',
-        'review-create': '2/day',
+        'review-create': '10/day',
         'review-list': '10/day',
-        'review-detail': '2/day',
-    }
+        'review-detail': '10/day',
+    },
+    
+    'DEFAULT_RENDERER_CLASSES':(
+        'rest_framework.renderers.JSONRenderer',
+    ),
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 2,
 }
 
 SIMPLE_JWT = {
